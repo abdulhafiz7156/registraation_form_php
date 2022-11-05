@@ -23,18 +23,18 @@
 //    $result = mysqli_query($conn, $sql);
 
     if(isset($_POST['sub'])) {
-        $id = $_POST['id'];
+
         $username = $_POST['username'];
         $email = $_POST['email'];
         $password = $_POST['password'];
 
-        $sql = "INSERT users (id, username, email, password) VALUES ('$id','$username','$email','$password')";
+        $sql = "INSERT user ( username, email, password) VALUES ('$username','$email','$password')";
 
         if ($conn->query($sql)) {
             echo "New record created successfully";
-            header("Location: ".$_SERVER['REQUEST_URI']);
+            header("Location: main.php");
         } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+            echo "This password or username is used";
         }
     };
 
@@ -44,10 +44,6 @@
         <div class="container">
             <form class="form-signin"  method="POST">
                 <h2>Form Registration</h2>
-                <?php if(isset($smsg)){?> <div class="alert alert-success" role="alert"> <?php echo $smsg; ?> </div><?php } ?>
-                <?php if(isset($fsmsg)){?> <div class="alert alert-danger" role="alert"> <?php echo $fsmsg; ?> </div><?php } ?>
-
-                <input type="number" name="id" class="form-control " placeholder="Id" required />
                 <input type="text" name="username" class="form-control" placeholder="Username" required />
                 <input type="email" name="email" class="form-control " placeholder="email" required />
                 <input type="password" name="password" class="form-control " placeholder="Password" required />

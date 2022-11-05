@@ -25,7 +25,7 @@
         $username = $_POST['username'];
         $password = $_POST['password'];
 
-        $sql = "select * from users where username='".$username."' AND password='".$password."' limit 1";
+        $sql = "select * from user where username='".$username."' AND password='".$password."' limit 1";
 
         $result = mysqli_query($conn, $sql);
 
@@ -33,18 +33,17 @@
             $row = mysqli_fetch_assoc($result);
             if($row['username'] === $username && $row['password'] === $password) {
                 echo "ottin bolam";
-                echo "Hello $username";
+//                header("Location: main.php");
             } else {
-                header("Location: index.php");
+                echo "Xato";
             }
         } else {
-            header("Location: idwndex.php?error+=Incorect User or password");
-            exit();
+            echo "Notog'ri";
         }
 
     } else {
             $error = "Your Login Name or Password is invalid";
-        }
+    }
 
 ?>
 
@@ -57,7 +56,8 @@
         <input type="text" name="username" class="form-control" placeholder="Username" required />
         <input type="password" name="password" class="form-control " placeholder="Password" required />
         <button class="btn btn-lg btn-primary btn-block" type="submit" name="sub" value="Button1">Login</button>
-        <a href="index.php">Register</a>
+        <a href="logout.php">Logout</a>
+        <a href="register.php">Register</a>
     </form>
 </div>
 
